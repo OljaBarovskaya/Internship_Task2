@@ -37,6 +37,12 @@ const baseConfig = {
       patterns: [{ from: "./src/assets/img", to: "./img" }],
     }),
   ],
+  devServer: {
+    contentBase: path.resolve(__dirname, "./dist"),
+    port: 9000,
+    open: true,
+    hot: true,
+  },
 };
 
 module.exports = ({ mode }) => {
