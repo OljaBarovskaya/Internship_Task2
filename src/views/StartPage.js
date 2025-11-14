@@ -1,14 +1,12 @@
 import { createButton } from "../components/Buttons";
 import state from "../state/GameState";
 import createGameView from "./GameView";
-import { startGame } from "../index";
+import startGame from "../components/Game";
 import gameStartState from "../state/GameStartState";
+import { WRAPPER_WIDTH, BASKET_WIDTH } from "../constants/constants";
 
 const body = document.querySelector("body");
 const wrapper = document.querySelector(".wrapper");
-
-const WRAPPER_WIDTH = 95;
-const BASKET_WIDTH = 100;
 
 let clientMainWidth =
   (document.documentElement.clientWidth * WRAPPER_WIDTH) / 100;
@@ -78,5 +76,6 @@ export default function createStartPage() {
       gameStartState.currentScore,
       gameStartState.bestScore
     );
+    console.log("5", gameStartState.level);
   });
 }

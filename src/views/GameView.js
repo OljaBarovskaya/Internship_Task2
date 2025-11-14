@@ -25,6 +25,7 @@ function createInfoButtons() {
     gameStartState.level,
     "level"
   );
+  console.log("level", gameStartState.level);
   const buttonCurrentScore = createInfoButton(
     "Score ",
     gameStartState.currentScore,
@@ -36,6 +37,7 @@ function createInfoButtons() {
     "best-score"
   );
 
+  console.log("6", gameStartState.level);
   const header = document.querySelector("header");
   header.append(buttonCurrentLevel);
   header.append(buttonCurrentScore);
