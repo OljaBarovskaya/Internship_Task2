@@ -24,12 +24,12 @@ function createResultTable(message) {
 
     const coin = document.querySelector(".coin");
     coin.remove();
+    state.activate();
     startGame(
       gameStartState.level,
       gameStartState.currentScore,
       state.bestScore
     );
-    state.activate;
   }
 
   restartButton.addEventListener("click", restartGame);

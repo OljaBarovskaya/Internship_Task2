@@ -1,5 +1,5 @@
 import {
-  BASKET_WIDTH,
+  BASKET_HEIGHT,
   SPEED_IN_PX,
   LEVEL_PERIOD,
 } from "../constants/constants";
@@ -8,7 +8,7 @@ import showResult from "./Result";
 import createCoin from "./Coin";
 
 let intervalLevel;
-let intervalCoin;
+let intervalCoinId = null;
 
 function coinSpeed(level) {
   return SPEED_IN_PX[level - 1];
@@ -19,7 +19,7 @@ export default function startGame(level, currentScore, bestScore) {
   const curScore = document.querySelector(".current-score");
   const levelCurrent = document.querySelector(".level");
   const bestScoreButton = document.querySelector(".best-score");
-  const distance = main.clientHeight - 2 * BASKET_WIDTH;
+  const distance = main.clientHeight - BASKET_HEIGHT - 30;
   const basket = document.querySelector(".basket");
 
   const gameState = {
@@ -50,25 +50,37 @@ export default function startGame(level, currentScore, bestScore) {
       console.log("8", gameState.level);
     } else {
       clearInterval(intervalLevel);
-      clearInterval(intervalCoin);
+      if (intervalCoinId !== null) {
+        cancelAnimationFrame(intervalCoinId);
+        intervalCoinId = null;
+      }
       showResult(gameState.currentScore, gameState.bestScore);
       state.deactivate();
+      return;
     }
   }
   function updateCoin(coin) {
     //console.log(coin, `${coin.offsetTop + gameState.speed}px`);
     const yNew = coin.offsetTop + gameState.speed;
     coin.style.top = `${yNew}px`;
-    // console.log(yNew, distance);
+    //console.log(yNew, distance);
     if (yNew > distance) {
-      clearInterval(intervalCoin);
+      if (intervalCoinId !== null) {
+        cancelAnimationFrame(intervalCoinId);
+        intervalCoinId = null;
+      }
       console.log(basket.style.left, coin.style.left);
-      if (basket.style.left === coin.style.left) {
+      const basketLeft = parseInt(basket.style.left, 10);
+      const coinLeft = parseInt(coin.style.left, 10);
+      if (basketLeft === coinLeft) {
         gameState.increaseCurrentScore();
       }
       coin.remove();
       startCoinFall();
+      gameState.speed = coinSpeed(gameState.level);
+      return;
     }
+    requestAnimationFrame(() => updateCoin(coin));
   }
 
   function startLevelUpdate() {
@@ -80,9 +92,7 @@ export default function startGame(level, currentScore, bestScore) {
     const coin = createCoin();
     // console.log(coin, main);
     main.prepend(coin);
-    intervalCoin = setInterval(() => {
-      updateCoin(coin);
-    }, 1000);
+    intervalCoinId = requestAnimationFrame(() => updateCoin(coin));
   }
 
   updateGameState();
