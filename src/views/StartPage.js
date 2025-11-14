@@ -3,18 +3,15 @@ import state from "../state/GameState";
 import createGameView from "./GameView";
 import startGame from "../components/Game";
 import gameStartState from "../state/GameStartState";
-import { WRAPPER_WIDTH, BASKET_WIDTH } from "../constants/constants";
+import {
+  rightSideEdge,
+  leftSideEdge,
+  basketPosition,
+  BASKET_WIDTH,
+} from "../constants/constants";
 
 const body = document.querySelector("body");
 const wrapper = document.querySelector(".wrapper");
-
-let clientMainWidth =
-  (document.documentElement.clientWidth * WRAPPER_WIDTH) / 100;
-let startPositionBasket = clientMainWidth / 2 - BASKET_WIDTH / 2;
-const clicksQuantity = Math.floor(clientMainWidth / BASKET_WIDTH);
-const sideIndent = (clientMainWidth - BASKET_WIDTH * clicksQuantity) / 2;
-const leftSideEdge = sideIndent;
-const rightSideEdge = clientMainWidth - sideIndent;
 
 function createHeading(text) {
   const h1 = document.createElement("h1");
@@ -32,8 +29,8 @@ function createHeader() {
 function createBasket() {
   const basket = document.createElement("div");
   basket.classList.add("basket");
-  basket.style.left = `${startPositionBasket}px`;
-  let left = startPositionBasket;
+  basket.style.left = `${basketPosition}px`;
+  let left = basketPosition;
   document.addEventListener("keydown", (event) => {
     console.log(state.isActive, left);
     if (state.isActive) {
