@@ -1,6 +1,7 @@
 import { createButton } from "../components/Buttons";
 import state from "../state/GameState";
-import { createGameView, startGame } from "../index";
+import createGameView from "./GameView";
+import { startGame } from "../index";
 import gameStartState from "../state/GameStartState";
 
 const body = document.querySelector("body");
