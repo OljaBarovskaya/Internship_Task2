@@ -21,7 +21,7 @@ function createHeading(text) {
 
 function createHeader() {
   const header = document.createElement("header");
-  const h1 = createHeading("Catch money game");
+  const h1 = createHeading("Bank Vault Robbery");
   header.appendChild(h1);
   return header;
 }
