@@ -1,10 +1,9 @@
-export default function determineGameFieldWidth(WRAPPER_WIDTH, BODY_MAX_WIDTH) {
+export default function determineGameFieldWidth(BODY_MAX_WIDTH) {
   let gameFieldWidth;
   if (document.documentElement.clientWidth < BODY_MAX_WIDTH) {
-    gameFieldWidth =
-      (document.documentElement.clientWidth * WRAPPER_WIDTH) / 100;
+    gameFieldWidth = document.documentElement.clientWidth;
   } else {
-    gameFieldWidth = (BODY_MAX_WIDTH * WRAPPER_WIDTH) / 100;
+    gameFieldWidth = BODY_MAX_WIDTH;
   }
   return gameFieldWidth;
 }

@@ -80,8 +80,6 @@ button:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 95%;
-  padding: 20px 0;
   height: 100vh;
 }
 
