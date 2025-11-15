@@ -2,6 +2,7 @@ import {
   BASKET_HEIGHT,
   SPEED_IN_PX,
   LEVEL_PERIOD,
+  COIN_HEIGHT,
 } from "../constants/constants";
 import state from "../state/GameState";
 import showResult from "./Result";
@@ -19,7 +20,7 @@ export default function startGame(level, currentScore, bestScore) {
   const curScore = document.querySelector(".current-score");
   const levelCurrent = document.querySelector(".level");
   const bestScoreButton = document.querySelector(".best-score");
-  const distance = main.clientHeight - BASKET_HEIGHT - 30;
+  const distance = main.clientHeight - BASKET_HEIGHT - COIN_HEIGHT / 2;
   const basket = document.querySelector(".basket");
 
   const gameState = {

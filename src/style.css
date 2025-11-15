@@ -3,7 +3,7 @@
 }
 
 body {
-  margin: 0;
+  margin: 0 auto;
   position: relative;
   max-width: 1920px;
   font-size: 10px;
@@ -13,6 +13,11 @@ main {
   position: relative;
   height: 100%;
   width: 100%;
+  background-image: url("./assets/img/bank_storage.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  z-index: -5;
 }
 
 header,
@@ -33,11 +38,13 @@ h1 {
 }
 
 .basket {
-  height: 100px;
-  width: 100px;
-  background-color: palevioletred;
+  height: 146px;
+  width: 155px;
+  background-image: url(./assets/img/bag.png);
+  background-size: cover;
   position: absolute;
   bottom: 0;
+  z-index: -2;
 }
 
 button {
@@ -79,11 +86,14 @@ button:hover {
 }
 
 .coin {
-  width: 100px;
+  width: 150px;
   height: 50px;
-  background-color: orange;
+  background-image: url(./assets/img/dollar.png);
+  background-size: contain;
   position: relative;
   z-index: -1;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .result-table {
