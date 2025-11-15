@@ -1,4 +1,28 @@
+import { createButton } from "../components/Buttons";
 import gameStartState from "../state/GameStartState";
+import state from "../state/GameState";
+import { moveBasket } from "./StartPage";
+
+function createArrowButtons() {
+  const main = document.querySelector("main");
+  const basket = document.querySelector(".basket");
+
+  const leftButton = createButton(["left-arrow"], "<");
+  const rightButton = createButton(["right-arrow"], ">");
+
+  console.log(basket);
+
+  leftButton.addEventListener("click", () => {
+    moveBasket("left", basket);
+  });
+
+  rightButton.addEventListener("click", () => {
+    moveBasket("right", basket);
+  });
+
+  main.append(leftButton);
+  main.append(rightButton);
+}
 
 function createInfoButtonSpan(value, className) {
   const span = document.createElement("span");
@@ -46,4 +70,7 @@ function createInfoButtons() {
 
 export default function createGameView() {
   createInfoButtons();
+  if (state.isMobile) {
+    createArrowButtons();
+  }
 }

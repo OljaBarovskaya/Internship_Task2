@@ -2,8 +2,12 @@ import "./style.css";
 import createStartPage from "./views/StartPage";
 import gameStartState from "./state/GameStartState";
 import state from "./state/GameState";
+import { isMobileDevice } from "./helpers/helpers";
 
 function startApp() {
+  const isMobile = isMobileDevice();
+
+  state.isMobile = isMobile;
   createStartPage();
 }
 

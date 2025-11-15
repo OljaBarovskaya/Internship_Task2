@@ -18,6 +18,10 @@ main {
   background-size: cover;
   background-position: center;
   z-index: -5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 5px;
 }
 
 header,
@@ -94,11 +98,11 @@ button:hover {
 }
 
 .coin {
-  width: 150px;
+  width: 50px;
   height: 50px;
   background-image: url(./assets/img/dollar.png);
   background-size: contain;
-  position: relative;
+  position: absolute;
   z-index: -1;
   background-repeat: no-repeat;
   background-position: center;
@@ -122,5 +126,17 @@ button:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
+}
+
+.left-arrow,
+.right-arrow {
+  height: 50px;
+  width: 50px;
+  background-color: #f7f294;
+  border: 1px solid #401f49;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
