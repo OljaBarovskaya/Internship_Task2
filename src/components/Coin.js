@@ -16,5 +16,13 @@ export default function createCoin() {
   div.style.left = `${x}px`;
   div.style.top = `${y}px`;
 
+  console.log(
+    "leftSideEdge, clicksQuantity, x, positionIndex",
+    leftSideEdge,
+    clicksQuantity,
+    x,
+    positionIndex
+  );
+
   return div;
 }

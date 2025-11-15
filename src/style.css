@@ -29,12 +29,19 @@ header {
   width: 100%;
   display: flex;
   justify-content: space-around;
+  background-color: #401f49;
+  color: #fff6ae;
+  padding: 15px;
 }
 
 h1 {
   display: inline-block;
   margin: 0;
   font-size: 3.5rem;
+}
+
+h2 {
+  text-align: center;
 }
 
 .basket {
@@ -50,10 +57,13 @@ h1 {
 button {
   padding: 20px;
   cursor: pointer;
+  background-color: #b3a1b8;
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 
 button:hover {
-  background-color: gold;
+  background-color: #f7f294;
 }
 
 .button_main {
@@ -61,16 +71,16 @@ button:hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 2.5rem;
+  font-size: 5rem;
   font-weight: 400;
   border-width: 3px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 15px rgba(179, 161, 184, 0.5);
   z-index: 10;
 }
 
 .information-button {
-  padding: 10px 20px;
-  border: 1px solid gold;
+  padding: 5px 20px;
+  background-color: #b3a1b8;
   font-size: 2rem;
   font-weight: 400;
 }
@@ -95,7 +105,11 @@ button:hover {
 }
 
 .result-table {
-  background-color: grey;
+  background-color: #401f49;
+  color: #fff6ae;
+  padding: 15px 25px;
+  font-size: 1.7rem;
+  font-weight: 400;
   position: absolute;
   width: 50%;
   height: 300px;
