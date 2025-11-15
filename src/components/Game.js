@@ -3,6 +3,8 @@ import {
   SPEED_IN_PX,
   LEVEL_PERIOD,
   COIN_HEIGHT,
+  BASKET_WIDTH,
+  COIN_WIDTH,
 } from "../constants/constants";
 import state from "../state/GameState";
 import showResult from "./Result";
@@ -73,7 +75,10 @@ export default function startGame(level, currentScore, bestScore) {
       console.log(basket.style.left, coin.style.left);
       const basketLeft = parseInt(basket.style.left, 10);
       const coinLeft = parseInt(coin.style.left, 10);
-      if (basketLeft === coinLeft) {
+      if (
+        basketLeft <= coinLeft &&
+        coinLeft <= basketLeft + BASKET_WIDTH - COIN_WIDTH
+      ) {
         gameState.increaseCurrentScore();
       }
       coin.remove();

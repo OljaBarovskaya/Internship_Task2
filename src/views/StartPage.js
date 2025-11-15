@@ -7,7 +7,7 @@ import {
   rightSideEdge,
   leftSideEdge,
   basketPosition,
-  BASKET_WIDTH,
+  BASKET_STEP,
 } from "../constants/constants";
 
 const body = document.querySelector("body");
@@ -26,23 +26,45 @@ function createHeader() {
   return header;
 }
 
+export function moveBasket(dir, basket) {
+  let left = Number(basket.style.left.slice(0, -2));
+  console.log(left, dir === "right", basket);
+  if (dir === "left" && left - BASKET_STEP > leftSideEdge) {
+    left = left - BASKET_STEP;
+    console.log("k", left);
+  }
+  if (dir === "right" && left + BASKET_STEP < rightSideEdge) {
+    left = left + BASKET_STEP;
+    console.log("d", left + BASKET_STEP, BASKET_STEP, rightSideEdge);
+  }
+  basket.style.left = `${left}px`;
+}
+
 function createBasket() {
   const basket = document.createElement("div");
   basket.classList.add("basket");
   basket.style.left = `${basketPosition}px`;
-  let left = basketPosition;
-  document.addEventListener("keydown", (event) => {
-    console.log(state.isActive, left);
-    if (state.isActive) {
-      if (event.code === "ArrowLeft" && left - BASKET_WIDTH > leftSideEdge) {
-        left = left - BASKET_WIDTH;
+  if (!state.isMobile) {
+    document.addEventListener("keydown", (event) => {
+      if (state.isActive) {
+        if (event.code === "ArrowLeft") {
+          moveBasket("left", basket);
+        }
+        if (event.code === "ArrowRight") {
+          moveBasket("right", basket);
+        }
+
+        // if (event.code === "ArrowLeft" && left - BASKET_STEP > leftSideEdge) {
+        //   left = left - BASKET_STEP;
+        // }
+        // if (event.code === "ArrowRight" && left + BASKET_STEP < rightSideEdge) {
+        //   left = left + BASKET_STEP;
+        // }
+        // basket.style.left = `${left}px`;
       }
-      if (event.code === "ArrowRight" && left + BASKET_WIDTH < rightSideEdge) {
-        left = left + BASKET_WIDTH;
-      }
-      basket.style.left = `${left}px`;
-    }
-  });
+    });
+  }
+
   return basket;
 }
 
