@@ -1,16 +1,14 @@
-import { createButton } from "../components/Buttons";
+import createButton from "../components/Buttons";
 import gameStartState from "../state/GameStartState";
 import state from "../state/GameState";
 import { moveBasket } from "./StartPage";
 
 function createArrowButtons() {
-  const main = document.querySelector("main");
-  const basket = document.querySelector(".basket");
+  const main = document.querySelector("main") as HTMLElement;
+  const basket = document.querySelector(".basket") as HTMLElement;
 
-  const leftButton = createButton(["left-arrow"], "<");
-  const rightButton = createButton(["right-arrow"], ">");
-
-  console.log(basket);
+  const leftButton = createButton(["left-arrow"], "<") as HTMLElement;
+  const rightButton = createButton(["right-arrow"], ">") as HTMLElement;
 
   leftButton.addEventListener("click", () => {
     moveBasket("left", basket);
@@ -24,15 +22,15 @@ function createArrowButtons() {
   main.append(rightButton);
 }
 
-function createInfoButtonSpan(value, className) {
+function createInfoButtonSpan(value: number, className: string) {
   const span = document.createElement("span");
   span.classList.add(className);
-  span.textContent = value;
+  span.textContent = String(value);
 
   return span;
 }
 
-function createInfoButton(text, value, className) {
+function createInfoButton(text: string, value: number, className: string) {
   const button = document.createElement("div");
   button.classList.add("information-button");
   button.textContent = text;
@@ -49,7 +47,7 @@ function createInfoButtons() {
     gameStartState.level,
     "level"
   );
-  console.log("level", gameStartState.level);
+
   const buttonCurrentScore = createInfoButton(
     "Score ",
     gameStartState.currentScore,
@@ -61,8 +59,7 @@ function createInfoButtons() {
     "best-score"
   );
 
-  console.log("6", gameStartState.level);
-  const header = document.querySelector("header");
+  const header = document.querySelector("header") as HTMLElement;
   header.append(buttonCurrentLevel);
   header.append(buttonCurrentScore);
   header.append(buttonBestScore);

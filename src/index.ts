@@ -17,7 +17,7 @@ function getStorageBestScore() {
 
 function setStorageBestScore() {
   if (state.bestScore) {
-    localStorage.setItem("bestScore", state.bestScore);
+    localStorage.setItem("bestScore", String(state.bestScore));
   }
 }
 

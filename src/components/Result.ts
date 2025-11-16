@@ -1,11 +1,11 @@
 import state from "../state/GameState";
-import { createButton } from "./Buttons";
+import createButton from "./Buttons";
 import startGame from "./Game";
 import gameStartState from "../state/GameStartState";
 
-const body = document.querySelector("body");
+const body = document.querySelector("body") as HTMLBodyElement;
 
-function createResultTable(message) {
+function createResultTable(message: string) {
   const resultTable = document.createElement("div");
   resultTable.classList.add("result-table");
 
@@ -22,7 +22,7 @@ function createResultTable(message) {
   function restartGame() {
     resultTable.remove();
 
-    const coin = document.querySelector(".coin");
+    const coin = document.querySelector(".coin") as HTMLElement;
     coin.remove();
     state.activate();
     startGame(
@@ -37,16 +37,16 @@ function createResultTable(message) {
   return resultTable;
 }
 
-export default function showResult(currentScore, bestScore) {
+export default function showResult(currentScore: number, bestScore: number) {
   const newRecordMessage = `Congratulations! You set a new record! Your Score is ${currentScore}`;
   const defaultMessage = `The game is over. Your score is ${currentScore}`;
-  const bestScoreButton = document.querySelector(".best-score");
+  const bestScoreButton = document.querySelector(".best-score") as HTMLElement;
 
   if (bestScore < currentScore) {
     state.bestScore = currentScore;
     createResultTable(newRecordMessage);
 
-    bestScoreButton.textContent = state.bestScore;
+    bestScoreButton.textContent = String(state.bestScore);
   } else {
     createResultTable(defaultMessage);
   }
