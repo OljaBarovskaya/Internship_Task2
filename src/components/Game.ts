@@ -46,7 +46,7 @@ export default function controller(action: "Start game" | "Stop game") {
         controller("Stop game");
       } else {
         state.increaseCurrentScore();
-
+        curScore.innerText = String(state.currentScore);
         if (intervalCoinId !== null) {
           cancelAnimationFrame(intervalCoinId);
           intervalCoinId = null;
