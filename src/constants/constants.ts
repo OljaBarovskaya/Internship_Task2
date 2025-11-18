@@ -19,3 +19,8 @@ export const leftSideEdge: number = sideIndent;
 export const rightSideEdge: number = gameFieldWidth - sideIndent - BASKET_WIDTH;
 export const coinClicksQuantity: number =
   (rightSideEdge - leftSideEdge) / COIN_WIDTH;
+
+export enum BASKET_MOVE {
+  left = "ArrowLeft",
+  right = "ArrowRight",
+}

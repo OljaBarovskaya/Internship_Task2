@@ -9,6 +9,7 @@ import {
   basketPosition,
   BASKET_STEP,
 } from "../constants/constants";
+import { BASKET_MOVE } from "../constants/constants";
 
 const body = document.querySelector("body") as HTMLElement;
 const wrapper = document.querySelector(".wrapper") as HTMLElement;
@@ -31,11 +32,9 @@ export function moveBasket(dir: "left" | "right", basket: HTMLElement) {
   console.log(left, dir === "right", basket);
   if (dir === "left" && left - BASKET_STEP > leftSideEdge) {
     left = left - BASKET_STEP;
-    console.log("k", left);
   }
   if (dir === "right" && left + BASKET_STEP < rightSideEdge) {
     left = left + BASKET_STEP;
-    console.log("d", left + BASKET_STEP, BASKET_STEP, rightSideEdge);
   }
   basket.style.left = `${left}px`;
 }
@@ -47,10 +46,10 @@ function createBasket() {
   if (!state.isMobile) {
     document.addEventListener("keydown", (event) => {
       if (state.isActive) {
-        if (event.code === "ArrowLeft") {
+        if (event.code === BASKET_MOVE.left) {
           moveBasket("left", basket);
         }
-        if (event.code === "ArrowRight") {
+        if (event.code === BASKET_MOVE.right) {
           moveBasket("right", basket);
         }
       }
