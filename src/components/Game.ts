@@ -43,11 +43,10 @@ export default function controller(action: "Start game" | "Stop game") {
         coinLeft > basketLeft + BASKET_WIDTH - COIN_WIDTH
       ) {
         coin.remove();
-        console.log(state.currentScore, state.bestScore);
         controller("Stop game");
       } else {
         state.increaseCurrentScore();
-        curScore.textContent = String(state.currentScore);
+
         if (intervalCoinId !== null) {
           cancelAnimationFrame(intervalCoinId);
           intervalCoinId = null;

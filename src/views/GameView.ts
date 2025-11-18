@@ -2,24 +2,51 @@ import createButton from "../components/Buttons";
 import state from "../state/GameState";
 import { moveBasket } from "./StartPage";
 
-function createArrowButtons() {
+function setTouchListeners() {
   const main = document.querySelector("main") as HTMLElement;
   const basket = document.querySelector(".basket") as HTMLElement;
 
-  const leftButton = createButton(["left-arrow"], "<") as HTMLElement;
-  const rightButton = createButton(["right-arrow"], ">") as HTMLElement;
+  const MIN_SWIPE_DISTANCE = 50;
+  let touchStartX = 0;
 
-  leftButton.addEventListener("click", () => {
-    moveBasket("left", basket);
+  main.addEventListener("touchstart", (event: TouchEvent) => {
+    touchStartX = event.touches[0]!.clientX;
+    console.log("touch");
   });
 
-  rightButton.addEventListener("click", () => {
-    moveBasket("right", basket);
-  });
+  main.addEventListener("touchend", (event: TouchEvent) => {
+    const touchEndX = event.changedTouches[0]!.clientX;
+    const distanceX = touchEndX - touchStartX;
 
-  main.append(leftButton);
-  main.append(rightButton);
+    if (Math.abs(distanceX) > MIN_SWIPE_DISTANCE) {
+      if (distanceX > 0) {
+        moveBasket("right", basket);
+      } else {
+        moveBasket("left", basket);
+      }
+    }
+    touchStartX = 0;
+  });
 }
+
+// function createArrowButtons() {
+//   const main = document.querySelector("main") as HTMLElement;
+//   const basket = document.querySelector(".basket") as HTMLElement;
+
+//   const leftButton = createButton(["left-arrow"], "<") as HTMLElement;
+//   const rightButton = createButton(["right-arrow"], ">") as HTMLElement;
+
+//   leftButton.addEventListener("click", () => {
+//     moveBasket("left", basket);
+//   });
+
+//   rightButton.addEventListener("click", () => {
+//     moveBasket("right", basket);
+//   });
+
+//   main.append(leftButton);
+//   main.append(rightButton);
+// }
 
 function createInfoButtonSpan(value: number, className: string) {
   const span = document.createElement("span");
@@ -63,6 +90,6 @@ function createInfoButtons() {
 export default function createGameView() {
   createInfoButtons();
   if (state.isMobile) {
-    createArrowButtons();
+    setTouchListeners();
   }
 }
