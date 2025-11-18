@@ -1,6 +1,5 @@
 import "./style.css";
 import createStartPage from "./views/StartPage";
-import gameStartState from "./state/GameStartState";
 import state from "./state/GameState";
 import {
   isMobileDevice,
@@ -18,7 +17,6 @@ function startApp() {
 window.addEventListener("beforeunload", setStorageBestScore);
 window.addEventListener("load", () => {
   if (getStorageBestScore) {
-    gameStartState.bestScore = getStorageBestScore();
     state.bestScore = getStorageBestScore();
   }
 });

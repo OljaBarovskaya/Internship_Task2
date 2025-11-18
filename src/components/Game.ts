@@ -19,11 +19,7 @@ function coinSpeed(level: number) {
   } else return 1;
 }
 
-export default function startGame(
-  level: number,
-  currentScore: number,
-  bestScore: number
-) {
+export default function startGame() {
   const main = document.querySelector("main") as HTMLElement;
   const curScore = document.querySelector(".current-score") as HTMLElement;
   const levelCurrent = document.querySelector(".level") as HTMLElement;
@@ -31,43 +27,32 @@ export default function startGame(
   const distance = main.clientHeight - BASKET_HEIGHT - COIN_HEIGHT / 2;
   const basket = document.querySelector(".basket") as HTMLElement;
 
-  const gameState = {
-    level: level,
-    currentScore: currentScore,
-    bestScore: bestScore,
-    speed: 1,
-    increaseCurrentScore: function () {
-      this.currentScore++;
-      curScore.textContent = String(this.currentScore);
-    },
-  };
-
-  function updateGameState() {
-    levelCurrent.textContent = String(level);
-    curScore.textContent = String(currentScore);
-    bestScoreButton.textContent = String(bestScore);
+  function updateInfoButtons() {
+    levelCurrent.textContent = String(state.level);
+    curScore.textContent = String(state.currentScore);
+    bestScoreButton.textContent = String(state.bestScore);
   }
 
   function levelIncrease() {
-    gameState.level++;
-    let speed = coinSpeed(gameState.level);
-    gameState.speed = speed!;
-    if (gameState.level <= 10) {
-      levelCurrent.innerText = String(gameState.level);
+    state.increaseLevel();
+    let speed = coinSpeed(state.level);
+    state.speed = speed!;
+    if (state.level <= 10) {
+      levelCurrent.innerText = String(state.level);
     } else {
       clearInterval(intervalLevel);
       intervalLevel = undefined;
       if (intervalCoinId !== null) {
         cancelAnimationFrame(intervalCoinId);
         intervalCoinId = null;
-        state.deactivate();
-        showResult(gameState.currentScore, gameState.bestScore);
+        state.deactivateGameState();
+        showResult(state.currentScore, state.bestScore);
       }
       return;
     }
   }
   function updateCoin(coin: HTMLElement) {
-    const yNew = coin.offsetTop + gameState.speed;
+    const yNew = coin.offsetTop + state.speed!;
     coin.style.top = `${yNew}px`;
     if (yNew > distance) {
       if (intervalCoinId !== null) {
@@ -80,9 +65,11 @@ export default function startGame(
         basketLeft <= coinLeft &&
         coinLeft <= basketLeft + BASKET_WIDTH - COIN_WIDTH
       ) {
-        gameState.increaseCurrentScore();
+        state.increaseCurrentScore();
+        curScore.textContent = String(state.currentScore);
       }
       coin.remove();
+
       startCoinFall();
       return;
     }
@@ -96,13 +83,15 @@ export default function startGame(
   }
 
   function startCoinFall() {
+    if (!state.speed) {
+      state.speed = 1;
+    }
     const coin = createCoin();
     main.prepend(coin);
     intervalCoinId = requestAnimationFrame(() => updateCoin(coin));
-    console.log("0", intervalCoinId);
   }
 
-  updateGameState();
+  updateInfoButtons();
   startLevelUpdate();
   startCoinFall();
 }

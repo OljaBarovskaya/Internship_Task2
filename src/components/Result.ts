@@ -1,7 +1,6 @@
 import state from "../state/GameState";
 import createButton from "./Buttons";
 import startGame from "./Game";
-import gameStartState from "../state/GameStartState";
 
 const body = document.querySelector("body") as HTMLBodyElement;
 
@@ -24,12 +23,9 @@ function createResultTable(message: string) {
 
     const coin = document.querySelector(".coin") as HTMLElement;
     coin.remove();
-    state.activate();
-    startGame(
-      gameStartState.level,
-      gameStartState.currentScore,
-      state.bestScore
-    );
+    state.resetState();
+    state.activateGameState();
+    startGame();
   }
 
   restartButton.addEventListener("click", restartGame);

@@ -1,5 +1,4 @@
 import createButton from "../components/Buttons";
-import gameStartState from "../state/GameStartState";
 import state from "../state/GameState";
 import { moveBasket } from "./StartPage";
 
@@ -42,20 +41,16 @@ function createInfoButton(text: string, value: number, className: string) {
 }
 
 function createInfoButtons() {
-  const buttonCurrentLevel = createInfoButton(
-    "Level ",
-    gameStartState.level,
-    "level"
-  );
+  const buttonCurrentLevel = createInfoButton("Level ", state.level, "level");
 
   const buttonCurrentScore = createInfoButton(
     "Score ",
-    gameStartState.currentScore,
+    state.currentScore,
     "current-score"
   );
   const buttonBestScore = createInfoButton(
     "Best Score ",
-    gameStartState.bestScore,
+    state.bestScore,
     "best-score"
   );
 

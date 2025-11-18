@@ -2,7 +2,6 @@ import createButton from "../components/Buttons";
 import state from "../state/GameState";
 import createGameView from "./GameView";
 import startGame from "../components/Game";
-import gameStartState from "../state/GameStartState";
 import {
   rightSideEdge,
   leftSideEdge,
@@ -81,12 +80,8 @@ export default function createStartPage() {
     }
     buttonMain.remove();
     state.changeView("game");
-    state.activate();
+    state.activateGameState();
     createGameView();
-    startGame(
-      gameStartState.level,
-      gameStartState.currentScore,
-      gameStartState.bestScore
-    );
+    startGame();
   });
 }
