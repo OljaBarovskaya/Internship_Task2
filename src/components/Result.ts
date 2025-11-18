@@ -1,6 +1,7 @@
 import state from "../state/GameState";
 import createButton from "./Buttons";
-import startGame from "./Game";
+import controller from "./Game";
+import { setStorageBestScore } from "../helpers/helpers";
 
 const body = document.querySelector("body") as HTMLBodyElement;
 
@@ -20,12 +21,8 @@ function createResultTable(message: string) {
 
   function restartGame() {
     resultTable.remove();
-
-    const coin = document.querySelector(".coin") as HTMLElement;
-    coin.remove();
     state.resetState();
-    state.activateGameState();
-    startGame();
+    controller("Start game");
   }
 
   restartButton.addEventListener("click", restartGame);
@@ -41,7 +38,7 @@ export default function showResult(currentScore: number, bestScore: number) {
   if (bestScore < currentScore) {
     state.bestScore = currentScore;
     createResultTable(newRecordMessage);
-
+    setStorageBestScore();
     bestScoreButton.textContent = String(state.bestScore);
   } else {
     createResultTable(defaultMessage);

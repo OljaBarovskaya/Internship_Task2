@@ -1,6 +1,5 @@
 import {
   BASKET_HEIGHT,
-  SPEED_IN_PX,
   LEVEL_PERIOD,
   COIN_HEIGHT,
   BASKET_WIDTH,
@@ -13,13 +12,7 @@ import createCoin from "./Coin";
 let intervalLevel: number | undefined;
 let intervalCoinId: number | null = null;
 
-function coinSpeed(level: number) {
-  if (SPEED_IN_PX[level - 1] !== undefined) {
-    return SPEED_IN_PX[level - 1];
-  } else return 1;
-}
-
-export default function startGame() {
+export default function controller(action: "Start game" | "Stop game") {
   const main = document.querySelector("main") as HTMLElement;
   const curScore = document.querySelector(".current-score") as HTMLElement;
   const levelCurrent = document.querySelector(".level") as HTMLElement;
@@ -35,43 +28,34 @@ export default function startGame() {
 
   function levelIncrease() {
     state.increaseLevel();
-    let speed = coinSpeed(state.level);
-    state.speed = speed!;
-    if (state.level <= 10) {
-      levelCurrent.innerText = String(state.level);
-    } else {
-      clearInterval(intervalLevel);
-      intervalLevel = undefined;
-      if (intervalCoinId !== null) {
-        cancelAnimationFrame(intervalCoinId);
-        intervalCoinId = null;
-        state.deactivateGameState();
-        showResult(state.currentScore, state.bestScore);
-      }
-      return;
-    }
+    levelCurrent.textContent = String(state.level);
+    state.increaseSpeed();
   }
+
   function updateCoin(coin: HTMLElement) {
-    const yNew = coin.offsetTop + state.speed!;
+    const yNew = coin.offsetTop + state.speed;
     coin.style.top = `${yNew}px`;
     if (yNew > distance) {
-      if (intervalCoinId !== null) {
-        cancelAnimationFrame(intervalCoinId);
-        intervalCoinId = null;
-      }
       const basketLeft = parseInt(basket.style.left, 10);
       const coinLeft = parseInt(coin.style.left, 10);
       if (
-        basketLeft <= coinLeft &&
-        coinLeft <= basketLeft + BASKET_WIDTH - COIN_WIDTH
+        coinLeft + COIN_WIDTH < basketLeft ||
+        coinLeft > basketLeft + BASKET_WIDTH - COIN_WIDTH
       ) {
+        coin.remove();
+        console.log(state.currentScore, state.bestScore);
+        controller("Stop game");
+      } else {
         state.increaseCurrentScore();
         curScore.textContent = String(state.currentScore);
+        if (intervalCoinId !== null) {
+          cancelAnimationFrame(intervalCoinId);
+          intervalCoinId = null;
+        }
+        coin.remove();
+        startCoinFall();
+        return;
       }
-      coin.remove();
-
-      startCoinFall();
-      return;
     }
     if (intervalLevel) {
       requestAnimationFrame(() => updateCoin(coin));
@@ -83,15 +67,34 @@ export default function startGame() {
   }
 
   function startCoinFall() {
-    if (!state.speed) {
-      state.speed = 1;
-    }
     const coin = createCoin();
     main.prepend(coin);
     intervalCoinId = requestAnimationFrame(() => updateCoin(coin));
   }
 
-  updateInfoButtons();
-  startLevelUpdate();
-  startCoinFall();
+  function startGame() {
+    state.activateGameState();
+    updateInfoButtons();
+    startLevelUpdate();
+    startCoinFall();
+  }
+
+  function stopGame() {
+    console.log("Stop", intervalLevel);
+    clearInterval(intervalLevel);
+    intervalLevel = undefined;
+    if (intervalCoinId !== null) {
+      cancelAnimationFrame(intervalCoinId);
+      intervalCoinId = null;
+      state.deactivateGameState();
+      showResult(state.currentScore, state.bestScore);
+    }
+    return;
+  }
+
+  if (action === "Start game") {
+    startGame();
+  } else {
+    stopGame();
+  }
 }

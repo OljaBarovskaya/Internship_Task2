@@ -1,8 +1,7 @@
 import { determineGameFieldWidth } from "../helpers/helpers";
 
 export const BASKET_WIDTH = 155;
-export const SPEED_IN_PX: number[] = [1, 2, 3, 4, 5, 6, 6.5, 7, 7.5, 8];
-export const LEVEL_PERIOD = 15000;
+export const LEVEL_PERIOD = 10000;
 export const BASKET_HEIGHT = 146;
 export const BASKET_STEP = 50;
 const BODY_MAX_WIDTH = 1920;

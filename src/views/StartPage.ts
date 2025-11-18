@@ -1,7 +1,7 @@
 import createButton from "../components/Buttons";
 import state from "../state/GameState";
 import createGameView from "./GameView";
-import startGame from "../components/Game";
+import controller from "../components/Game";
 import {
   rightSideEdge,
   leftSideEdge,
@@ -80,8 +80,8 @@ export default function createStartPage() {
     }
     buttonMain.remove();
     state.changeView("game");
-    state.activateGameState();
+
     createGameView();
-    startGame();
+    controller("Start game");
   });
 }

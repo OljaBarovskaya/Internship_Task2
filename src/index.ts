@@ -14,7 +14,6 @@ function startApp() {
   createStartPage();
 }
 
-window.addEventListener("beforeunload", setStorageBestScore);
 window.addEventListener("load", () => {
   if (getStorageBestScore) {
     state.bestScore = getStorageBestScore();

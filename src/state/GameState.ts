@@ -1,11 +1,9 @@
-import { SPEED_IN_PX } from "../constants/constants";
-
 let state = {
   view: "Start page",
   isActive: false,
   isMobile: false,
   level: 1,
-  speed: SPEED_IN_PX[0],
+  speed: 1,
   currentScore: 0,
   bestScore: 0,
 
@@ -21,6 +19,9 @@ let state = {
   increaseLevel: function () {
     this.level++;
   },
+  increaseSpeed: function () {
+    this.speed++;
+  },
   increaseCurrentScore: function () {
     this.currentScore++;
   },
@@ -31,7 +32,7 @@ let state = {
   resetState: function () {
     this.level = 1;
     this.currentScore = 0;
-    this.speed = SPEED_IN_PX[0];
+    this.speed = 1;
   },
 };
 
