@@ -1,3 +1,5 @@
+import state from "../state/GameState";
+
 export function determineGameFieldWidth(BODY_MAX_WIDTH: number): number {
   let gameFieldWidth: number;
   if (document.documentElement.clientWidth < BODY_MAX_WIDTH) {
@@ -16,4 +18,14 @@ export function isMobileDevice(): boolean {
   );
 
   return isMobile;
+}
+
+export function getStorageBestScore() {
+  return Number(localStorage.getItem("bestScore"));
+}
+
+export function setStorageBestScore() {
+  if (state.bestScore) {
+    localStorage.setItem("bestScore", String(state.bestScore));
+  }
 }

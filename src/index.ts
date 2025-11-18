@@ -2,23 +2,17 @@ import "./style.css";
 import createStartPage from "./views/StartPage";
 import gameStartState from "./state/GameStartState";
 import state from "./state/GameState";
-import { isMobileDevice } from "./helpers/helpers";
+import {
+  isMobileDevice,
+  setStorageBestScore,
+  getStorageBestScore,
+} from "./helpers/helpers";
 
 function startApp() {
   const isMobile = isMobileDevice();
 
   state.isMobile = isMobile;
   createStartPage();
-}
-
-function getStorageBestScore() {
-  return Number(localStorage.getItem("bestScore"));
-}
-
-function setStorageBestScore() {
-  if (state.bestScore) {
-    localStorage.setItem("bestScore", String(state.bestScore));
-  }
 }
 
 window.addEventListener("beforeunload", setStorageBestScore);
