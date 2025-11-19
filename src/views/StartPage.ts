@@ -13,6 +13,31 @@ import { BASKET_MOVE } from "../constants/constants";
 const body = document.querySelector("body") as HTMLElement;
 const wrapper = document.querySelector(".wrapper") as HTMLElement;
 
+function setupTouchControls(basket: HTMLElement) {
+  let initialTouchX: number | null = null;
+
+  document.addEventListener("touchstart", (event: TouchEvent) => {
+    initialTouchX = event.touches[0]!.clientX;
+  });
+
+  document.addEventListener("touchmove", (event: TouchEvent) => {
+    if (initialTouchX === null || !state.isActive) {
+      return;
+    }
+    const currentTouchX = event.touches[0]!.clientX;
+    const diffX = currentTouchX - initialTouchX;
+    const SWIPE_THRESHOLD = DIMENSIONS!.BASKET_STEP / 2;
+    if (Math.abs(diffX) > SWIPE_THRESHOLD) {
+      if (diffX > 0) {
+        moveBasket("right", basket);
+      } else {
+        moveBasket("left", basket);
+      }
+      initialTouchX = currentTouchX;
+    }
+  });
+}
+
 function createHeading(text: string) {
   const h1 = document.createElement("h1");
   h1.innerText = text;
@@ -44,6 +69,7 @@ function createBasket() {
   basket.style.left = `${basketPosition}px`;
   basket.style.width = `${DIMENSIONS!.BASKET_WIDTH}px`;
   basket.style.height = `${DIMENSIONS!.BASKET_HEIGHT}px`;
+  console.log("mobile", state.isMobile);
   if (!state.isMobile) {
     document.addEventListener("keydown", (event) => {
       if (state.isActive) {
@@ -55,6 +81,8 @@ function createBasket() {
         }
       }
     });
+  } else {
+    setupTouchControls(basket);
   }
 
   return basket;
