@@ -11,6 +11,7 @@ body {
   position: relative;
   max-width: 1920px;
   font-size: 10px;
+  max-height: 100vh;
 }
 
 main {

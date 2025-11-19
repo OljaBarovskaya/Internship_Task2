@@ -6,7 +6,7 @@ import {
   rightSideEdge,
   leftSideEdge,
   basketPosition,
-  BASKET_STEP,
+  DIMENSIONS,
 } from "../constants/constants";
 import { BASKET_MOVE } from "../constants/constants";
 
@@ -29,11 +29,11 @@ function createHeader(): HTMLElement {
 export function moveBasket(dir: "left" | "right", basket: HTMLElement) {
   let left = Number(basket.style.left.slice(0, -2));
   console.log(left, dir === "right", basket);
-  if (dir === "left" && left - BASKET_STEP > leftSideEdge) {
-    left = left - BASKET_STEP;
+  if (dir === "left" && left - DIMENSIONS!.BASKET_STEP > leftSideEdge) {
+    left = left - DIMENSIONS!.BASKET_STEP;
   }
-  if (dir === "right" && left + BASKET_STEP < rightSideEdge) {
-    left = left + BASKET_STEP;
+  if (dir === "right" && left + DIMENSIONS!.BASKET_STEP < rightSideEdge) {
+    left = left + DIMENSIONS!.BASKET_STEP;
   }
   basket.style.left = `${left}px`;
 }
@@ -42,6 +42,8 @@ function createBasket() {
   const basket = document.createElement("div");
   basket.classList.add("basket");
   basket.style.left = `${basketPosition}px`;
+  basket.style.width = `${DIMENSIONS!.BASKET_WIDTH}px`;
+  basket.style.height = `${DIMENSIONS!.BASKET_HEIGHT}px`;
   if (!state.isMobile) {
     document.addEventListener("keydown", (event) => {
       if (state.isActive) {

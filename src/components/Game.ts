@@ -1,10 +1,4 @@
-import {
-  BASKET_HEIGHT,
-  LEVEL_PERIOD,
-  COIN_HEIGHT,
-  BASKET_WIDTH,
-  COIN_WIDTH,
-} from "../constants/constants";
+import { LEVEL_PERIOD, DIMENSIONS } from "../constants/constants";
 import state from "../state/GameState";
 import showResult from "./Result";
 import createCoin from "./Coin";
@@ -17,7 +11,8 @@ export default function controller(action: "Start game" | "Stop game") {
   const curScore = document.querySelector(".current-score") as HTMLElement;
   const levelCurrent = document.querySelector(".level") as HTMLElement;
   const bestScoreButton = document.querySelector(".best-score") as HTMLElement;
-  const distance = main.clientHeight - BASKET_HEIGHT - COIN_HEIGHT / 2;
+  const distance =
+    main.clientHeight - DIMENSIONS!.BASKET_HEIGHT - DIMENSIONS!.COIN_HEIGHT / 2;
   const basket = document.querySelector(".basket") as HTMLElement;
 
   function updateInfoButtons() {
@@ -39,8 +34,9 @@ export default function controller(action: "Start game" | "Stop game") {
       const basketLeft = parseInt(basket.style.left, 10);
       const coinLeft = parseInt(coin.style.left, 10);
       if (
-        coinLeft + COIN_WIDTH < basketLeft ||
-        coinLeft > basketLeft + BASKET_WIDTH - COIN_WIDTH
+        coinLeft + DIMENSIONS!.COIN_WIDTH < basketLeft ||
+        coinLeft >
+          basketLeft + DIMENSIONS!.BASKET_WIDTH - DIMENSIONS!.COIN_WIDTH
       ) {
         coin.remove();
         controller("Stop game");
