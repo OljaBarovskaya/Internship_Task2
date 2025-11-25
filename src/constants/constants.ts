@@ -22,7 +22,7 @@ export const leftSideEdge: number = sideIndent;
 export const rightSideEdge: number =
   gameFieldWidth - sideIndent - DIMENSIONS!.BASKET_WIDTH;
 export const coinClicksQuantity: number =
-  (rightSideEdge - leftSideEdge) / DIMENSIONS!.BASKET_WIDTH;
+  (rightSideEdge - leftSideEdge) / DIMENSIONS!.COIN_WIDTH;
 
 function countDimensions(gameFieldWidth: number) {
   if (gameFieldWidth >= 800) {
