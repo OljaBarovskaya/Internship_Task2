@@ -75,7 +75,6 @@ export default function controller(action: "Start game" | "Stop game") {
   }
 
   function stopGame() {
-    console.log("Stop", intervalLevel);
     clearInterval(intervalLevel);
     intervalLevel = undefined;
     if (intervalCoinId !== null) {
