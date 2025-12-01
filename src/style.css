@@ -1,0 +1,157 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  margin: 0 auto;
+  position: relative;
+  max-width: 1920px;
+  font-size: 10px;
+  max-height: 100vh;
+}
+
+main {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-image: url("./assets/img/bank_storage.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  z-index: -5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 5px;
+}
+
+header,
+main {
+  margin: 0 auto;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: #401f49;
+  color: #fff6ae;
+  padding: 15px;
+}
+
+h1 {
+  display: inline-block;
+  margin: 0;
+  font-size: 3.5rem;
+}
+
+h2 {
+  text-align: center;
+}
+
+.basket {
+  height: 146px;
+  width: 155px;
+  background-image: url(./assets/img/bag.png);
+  background-size: cover;
+  position: absolute;
+  bottom: 0;
+  z-index: -2;
+}
+
+button {
+  padding: 20px;
+  cursor: pointer;
+  background-color: #b3a1b8;
+  font-size: 2.5rem;
+  font-weight: 400;
+}
+
+button:hover {
+  background-color: #f7f294;
+}
+
+.button_main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
+  font-weight: 400;
+  border-width: 3px;
+  box-shadow: 5px 5px 15px rgba(179, 161, 184, 0.5);
+  z-index: 10;
+}
+
+.information-button {
+  padding: 5px 20px;
+  background-color: #b3a1b8;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.wrapper {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.coin {
+  width: 50px;
+  height: 50px;
+  background-image: url(./assets/img/dollar.png);
+  background-size: contain;
+  position: absolute;
+  z-index: -1;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.result-table {
+  background-color: #401f49;
+  color: #fff6ae;
+  padding: 15px 25px;
+  font-size: 1.7rem;
+  font-weight: 400;
+  position: absolute;
+  width: 50%;
+  height: 300px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-width: 3px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.left-arrow,
+.right-arrow {
+  height: 50px;
+  width: 50px;
+  background-color: #f7f294;
+  border: 1px solid #401f49;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 585px) {
+  html {
+    font-size: 6.5px;
+  }
+
+  .result-table {
+    height: 200px;
+  }
+}
